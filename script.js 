@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const openButton = document.getElementById("openButton");
     const envelope = document.getElementById("envelope");
