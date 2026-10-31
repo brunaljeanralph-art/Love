@@ -39,6 +39,8 @@ button:focus-visible {
     outline-offset: 5px;
 }
 
+/* DÉCORATIONS D'ARRIÈRE-PLAN */
+
 #particle-field,
 #petal-field {
     position: fixed;
@@ -77,6 +79,8 @@ button:focus-visible {
     background: #e6b9d0;
 }
 
+/* CONTENEUR PRINCIPAL */
+
 .page-container {
     position: relative;
     z-index: 1;
@@ -100,6 +104,8 @@ button:focus-visible {
 .tiny-heart {
     font-size: .8rem;
 }
+
+/* PAGE D'ACCUEIL */
 
 .intro {
     min-height: 720px;
@@ -146,6 +152,8 @@ button:focus-visible {
     font-size: 1.25rem;
     line-height: 1.65;
 }
+
+/* ENVELOPPE ANIMÉE */
 
 .envelope-scene {
     width: 240px;
@@ -246,12 +254,17 @@ button:focus-visible {
     opacity: 0;
 }
 
+/* BOUTONS */
+
 .primary-button,
 .secret-button,
 .music-button {
     border: 0;
     cursor: pointer;
-    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 .primary-button {
@@ -287,6 +300,8 @@ button:focus-visible {
     font-style: italic;
 }
 
+/* AFFICHAGE ET ANIMATION DE LA LETTRE */
+
 .hidden {
     display: none !important;
 }
@@ -300,11 +315,14 @@ button:focus-visible {
         opacity: 0;
         transform: translateY(25px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
+/* PAPIER DE LA LETTRE */
 
 .letter-paper {
     position: relative;
@@ -375,6 +393,8 @@ button:focus-visible {
     color: var(--deep-pink);
 }
 
+/* TEXTE DE LA LETTRE */
+
 .letter-body {
     position: relative;
     color: #49343c;
@@ -415,6 +435,8 @@ button:focus-visible {
     text-align: center;
 }
 
+/* SIGNATURE */
+
 .signature {
     display: flex;
     flex-direction: column;
@@ -436,6 +458,8 @@ button:focus-visible {
 .paper-bottom-decoration {
     margin-top: 40px;
 }
+
+/* MESSAGE SECRET */
 
 .secret-section {
     max-width: 650px;
@@ -518,6 +542,8 @@ button:focus-visible {
     font-size: 1.5rem;
 }
 
+/* MUSIQUE */
+
 .music-button {
     display: flex;
     align-items: center;
@@ -540,6 +566,8 @@ button:focus-visible {
     text-align: center;
 }
 
+/* PIED DE PAGE */
+
 .site-footer {
     display: flex;
     justify-content: center;
@@ -554,6 +582,8 @@ button:focus-visible {
 .footer-heart {
     color: var(--deep-pink);
 }
+
+/* PÉTALES ANIMÉS */
 
 .petal {
     position: fixed;
@@ -570,17 +600,22 @@ button:focus-visible {
         transform: translate3d(0, -5vh, 0) rotate(0deg);
         opacity: 0;
     }
+
     10% {
         opacity: .65;
     }
+
     90% {
         opacity: .45;
     }
+
     100% {
         transform: translate3d(var(--drift), 110vh, 0) rotate(600deg);
         opacity: 0;
     }
 }
+
+/* PETITS POINTS LUMINEUX */
 
 .particle {
     position: fixed;
@@ -599,13 +634,17 @@ button:focus-visible {
         transform: translateY(0) scale(.7);
         opacity: .15;
     }
+
     to {
         transform: translateY(-18px) scale(1.4);
         opacity: .65;
     }
 }
 
+/* ADAPTATION AUX TÉLÉPHONES */
+
 @media (max-width: 520px) {
+
     .page-container {
         width: min(100% - 22px, 850px);
         padding-top: 25px;
@@ -653,9 +692,13 @@ button:focus-visible {
         flex-wrap: wrap;
         font-size: .78rem;
     }
+
 }
 
+/* RESPECT DES PRÉFÉRENCES D'ANIMATION */
+
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -664,4 +707,5 @@ button:focus-visible {
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
+
 }
