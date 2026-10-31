@@ -10,13 +10,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="script.js?v=2" defer></script>
 </head>
+
 <body>
-    <!-- Décoration lumineuse -->
+
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
 
@@ -24,16 +26,19 @@
     <div id="particle-field" aria-hidden="true"></div>
 
     <main class="page-container">
-        <!-- En-tête -->
+
         <header class="top-label">
             <span class="tiny-heart" aria-hidden="true">♥</span>
             <span>UNE PETITE SURPRISE POUR TOI</span>
             <span class="tiny-heart" aria-hidden="true">♥</span>
         </header>
 
-        <!-- Page d'accueil -->
+        <!-- PAGE D'ACCUEIL -->
         <section class="intro" id="intro">
-            <div class="title-ornament" aria-hidden="true">✧ ♡ ✧</div>
+
+            <div class="title-ornament" aria-hidden="true">
+                ✧ ♡ ✧
+            </div>
 
             <p class="eyebrow">
                 À la personne qui occupe une place spéciale dans mon cœur
@@ -50,9 +55,10 @@
                 Aujourd’hui, j’ai préparé quelque chose pour toi…
             </p>
 
-            <!-- Enveloppe animée -->
             <div class="envelope-scene">
+
                 <div class="envelope" id="envelope">
+
                     <div class="envelope-back"></div>
 
                     <div class="envelope-letter">
@@ -64,7 +70,9 @@
                     <div class="envelope-flap"></div>
 
                     <div class="envelope-seal" aria-hidden="true">♥</div>
+
                 </div>
+
             </div>
 
             <button class="primary-button" id="openButton" type="button">
@@ -72,17 +80,24 @@
                 <span aria-hidden="true">♡</span>
             </button>
 
-            <p class="hint">Prends un petit instant pour toi…</p>
+            <p class="hint">
+                Prends un petit instant pour toi…
+            </p>
+
         </section>
 
-        <!-- Lettre d'amour -->
+        <!-- LETTRE D'AMOUR -->
         <section class="letter-section hidden" id="letter" aria-hidden="true">
+
             <div class="letter-paper">
+
                 <div class="paper-top-decoration" aria-hidden="true">
                     ✧ &nbsp; ♡ &nbsp; ✧
                 </div>
 
-                <p class="letter-kicker">Une lettre écrite avec le cœur</p>
+                <p class="letter-kicker">
+                    Une lettre écrite avec le cœur
+                </p>
 
                 <h2>
                     À toi Love <br>
@@ -95,8 +110,8 @@
                     <span></span>
                 </div>
 
-                <!-- Texte de ta lettre -->
                 <article class="letter-body">
+
                     <p>
                         Je ne sais pas toujours trouver les mots parfaits
                         pour te dire ce que je ressens, mais aujourd’hui,
@@ -171,15 +186,17 @@
                         je te choisirais encore.
                     </p>
 
-                    <p class="love-declaration">Je t’aime, Souvenir. ❤️</p>
+                    <p class="love-declaration">
+                        Je t’aime, Souvenir. ❤️
+                    </p>
 
                     <p class="last-paragraph">
                         À toi, aujourd’hui, demain et pour tous les beaux
                         moments que nous n’avons pas encore vécus…
                     </p>
+
                 </article>
 
-                <!-- Signature -->
                 <div class="signature">
                     <span>Avec tout mon cœur,</span>
                     <strong>Pour toi, Souvenir ♥</strong>
@@ -188,13 +205,18 @@
                 <div class="paper-bottom-decoration" aria-hidden="true">
                     ♡ &nbsp; ✧ &nbsp; ♡
                 </div>
+
             </div>
 
-            <!-- Petite surprise supplémentaire -->
+            <!-- PETITE SURPRISE SUPPLÉMENTAIRE -->
             <section class="secret-section">
+
                 <div class="secret-star" aria-hidden="true">✧</div>
 
-                <p class="secret-eyebrow">Il reste encore une petite chose…</p>
+                <p class="secret-eyebrow">
+                    Il reste encore une petite chose…
+                </p>
+
                 <h3>Un dernier secret</h3>
 
                 <p class="secret-intro">
@@ -213,7 +235,12 @@
                     <span aria-hidden="true">♡</span>
                 </button>
 
-                <div class="secret-message hidden" id="secretMessage" aria-hidden="true">
+                <div
+                    class="secret-message hidden"
+                    id="secretMessage"
+                    aria-hidden="true"
+                >
+
                     <div class="secret-heart" aria-hidden="true">♥</div>
 
                     <p>
@@ -234,11 +261,18 @@
                         il y en a un que je veux que tu retiennes :
                         <strong>toi.</strong> ❤️
                     </p>
+
                 </div>
+
             </section>
 
-            <!-- Contrôle de la musique -->
-            <button class="music-button" id="musicButton" type="button" aria-pressed="false">
+            <!-- MUSIQUE -->
+            <button
+                class="music-button"
+                id="musicButton"
+                type="button"
+                aria-pressed="false"
+            >
                 <span id="musicIcon" aria-hidden="true">♫</span>
                 <span id="musicLabel">Écouter notre ambiance</span>
             </button>
@@ -247,17 +281,23 @@
                 Certaines personnes deviennent précieuses sans même
                 s’en rendre compte. ♡
             </p>
+
         </section>
 
-        <!-- Pied de page -->
         <footer class="site-footer">
             <span>Créé avec amour</span>
             <span class="footer-heart" aria-hidden="true">♥</span>
             <span>Pour Love</span>
         </footer>
+
     </main>
 
-    <!-- Place ton fichier musical dans assets/music.mp3 -->
-    <audio id="backgroundMusic" src="assets/music.mp3" loop preload="none"></audio>
+    <audio
+        id="backgroundMusic"
+        src="assets/music.mp3"
+        loop
+        preload="none"
+    ></audio>
+
 </body>
 </html>
