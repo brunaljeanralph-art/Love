@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     const openButton = document.getElementById("openButton");
     const envelope = document.getElementById("envelope");
     const intro = document.getElementById("intro");
@@ -17,134 +18,245 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let letterOpened = false;
 
-    // Affiche la lettre après l'animation de l'enveloppe.
-    openButton?.addEventListener("click", () => {
+    // VÉRIFICATION DES ÉLÉMENTS PRINCIPAUX
+    if (!openButton || !intro || !letter) {
+        console.error("Erreur : un élément essentiel de la page est introuvable.");
+        return;
+    }
+
+    // OUVRIR L'ENVELOPPE ET AFFICHER LA LETTRE
+    openButton.addEventListener("click", () => {
+
         if (letterOpened) {
-            letter?.scrollIntoView({ behavior: "smooth", block: "start" });
+            letter.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
             return;
         }
 
         letterOpened = true;
-        envelope?.classList.add("opened");
+
+        if (envelope) {
+            envelope.classList.add("opened");
+        }
+
         openButton.disabled = true;
         openButton.textContent = "Une lettre rien que pour toi ♡";
 
-        window.setTimeout(() => {
-            intro?.classList.add("hidden");
-            letter?.classList.remove("hidden");
-            letter?.setAttribute("aria-hidden", "false");
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            createPetals(18);
-        }, 950);
-
-        // Le navigateur autorise plus facilement la musique après un clic.
+        // La musique est indépendante de l'ouverture de la lettre.
         startMusic();
+
+        // Après l'animation, on affiche la lettre.
+        window.setTimeout(() => {
+
+            intro.classList.add("hidden");
+
+            letter.classList.remove("hidden");
+            letter.setAttribute("aria-hidden", "false");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            createPetals(18);
+
+        }, 850);
+
     });
 
-    // Ouvre ou referme le petit message secret.
-    secretButton?.addEventListener("click", () => {
-        if (!secretMessage) return;
+    // AFFICHER OU CACHER LE MESSAGE SECRET
+    if (secretButton && secretMessage) {
 
-        const isHidden = secretMessage.classList.contains("hidden");
+        secretButton.addEventListener("click", () => {
 
-        if (isHidden) {
-            secretMessage.classList.remove("hidden");
-            secretMessage.setAttribute("aria-hidden", "false");
-            secretButton.setAttribute("aria-expanded", "true");
-            secretButton.innerHTML = "Mon secret est révélé ♥";
+            const isHidden = secretMessage.classList.contains("hidden");
 
-            createPetals(24);
+            if (isHidden) {
 
-            window.setTimeout(() => {
-                secretMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-            }, 150);
-        } else {
-            secretMessage.classList.add("hidden");
-            secretMessage.setAttribute("aria-hidden", "true");
-            secretButton.setAttribute("aria-expanded", "false");
-            secretButton.innerHTML = 'Découvrir mon petit secret <span aria-hidden="true">♡</span>';
-        }
-    });
+                secretMessage.classList.remove("hidden");
+                secretMessage.setAttribute("aria-hidden", "false");
 
-    // Lance la musique et gère le cas où le fichier audio manque.
+                secretButton.setAttribute("aria-expanded", "true");
+
+                secretButton.innerHTML = "Mon secret est révélé ♥";
+
+                createPetals(24);
+
+                window.setTimeout(() => {
+                    secretMessage.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                }, 150);
+
+            } else {
+
+                secretMessage.classList.add("hidden");
+                secretMessage.setAttribute("aria-hidden", "true");
+
+                secretButton.setAttribute("aria-expanded", "false");
+
+                secretButton.innerHTML =
+                    'Découvrir mon petit secret <span aria-hidden="true">♡</span>';
+
+            }
+
+        });
+
+    }
+
+    // LANCER LA MUSIQUE SANS BLOQUER LE RESTE DU SITE
     async function startMusic() {
+
         if (!music) return;
 
         try {
+
             await music.play();
             updateMusicButton(true);
+
         } catch (error) {
-            // Vérifie que assets/music.mp3 existe et réessaie avec le bouton.
+
+            // La lettre reste accessible même si la musique ne démarre pas.
             updateMusicButton(false);
+
+            console.warn(
+                "La musique n'a pas pu démarrer. Vérifiez assets/music.mp3.",
+                error
+            );
+
         }
+
     }
 
+    // METTRE À JOUR LE BOUTON MUSICAL
     function updateMusicButton(isPlaying) {
+
         if (!musicButton || !musicIcon || !musicLabel) return;
 
         musicButton.setAttribute("aria-pressed", String(isPlaying));
 
         if (isPlaying) {
+
             musicIcon.textContent = "♫";
             musicLabel.textContent = "Mettre la musique en pause";
+
         } else {
+
             musicIcon.textContent = "♪";
             musicLabel.textContent = "Écouter notre ambiance";
+
         }
+
     }
 
-    musicButton?.addEventListener("click", async () => {
-        if (!music) return;
+    // CONTRÔLE MANUEL DE LA MUSIQUE
+    if (musicButton && music) {
 
-        if (music.paused) {
-            await startMusic();
-        } else {
-            music.pause();
+        musicButton.addEventListener("click", async () => {
+
+            if (music.paused) {
+
+                await startMusic();
+
+            } else {
+
+                music.pause();
+                updateMusicButton(false);
+
+            }
+
+        });
+
+        music.addEventListener("play", () => {
+            updateMusicButton(true);
+        });
+
+        music.addEventListener("pause", () => {
             updateMusicButton(false);
-        }
-    });
+        });
 
-    music?.addEventListener("play", () => updateMusicButton(true));
-    music?.addEventListener("pause", () => updateMusicButton(false));
-    music?.addEventListener("ended", () => updateMusicButton(false));
+        music.addEventListener("ended", () => {
+            updateMusicButton(false);
+        });
 
-    // Crée des pétales romantiques qui tombent sur la page.
+    }
+
+    // CRÉER LES PÉTALES ROMANTIQUES
     function createPetals(amount = 12) {
+
         if (!petalField) return;
 
         const symbols = ["♥", "♡", "✿", "❀"];
 
         for (let i = 0; i < amount; i++) {
+
             const petal = document.createElement("span");
+
             petal.className = "petal";
-            petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+            petal.textContent =
+                symbols[Math.floor(Math.random() * symbols.length)];
+
             petal.style.left = `${Math.random() * 100}vw`;
-            petal.style.fontSize = `${12 + Math.random() * 15}px`;
-            petal.style.animationDuration = `${5 + Math.random() * 6}s`;
-            petal.style.animationDelay = `${Math.random() * 2}s`;
-            petal.style.setProperty("--drift", `${Math.random() * 160 - 80}px`);
+
+            petal.style.fontSize =
+                `${12 + Math.random() * 15}px`;
+
+            petal.style.animationDuration =
+                `${5 + Math.random() * 6}s`;
+
+            petal.style.animationDelay =
+                `${Math.random() * 2}s`;
+
+            petal.style.setProperty(
+                "--drift",
+                `${Math.random() * 160 - 80}px`
+            );
 
             petalField.appendChild(petal);
-            window.setTimeout(() => petal.remove(), 13000);
+
+            window.setTimeout(() => {
+                petal.remove();
+            }, 13000);
+
         }
+
     }
 
-    // Ajoute les petits points lumineux du fond.
+    // CRÉER LES PETITS POINTS LUMINEUX
     function createParticles(amount = 22) {
+
         if (!particleField) return;
 
         for (let i = 0; i < amount; i++) {
+
             const particle = document.createElement("span");
+
             particle.className = "particle";
+
             particle.style.left = `${Math.random() * 100}vw`;
             particle.style.top = `${Math.random() * 100}vh`;
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            particle.style.animationDuration = `${3 + Math.random() * 5}s`;
+
+            particle.style.animationDelay =
+                `${Math.random() * 5}s`;
+
+            particle.style.animationDuration =
+                `${3 + Math.random() * 5}s`;
+
             particleField.appendChild(particle);
+
         }
+
     }
 
+    // INITIALISATION DES DÉCORATIONS
     createParticles();
-    window.setTimeout(() => createPetals(8), 1200);
+
+    window.setTimeout(() => {
+        createPetals(8);
+    }, 1200);
+
 });
